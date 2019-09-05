@@ -7,6 +7,8 @@ import java.sql.Connection;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,6 +26,21 @@ public class DataSourceTests {
 
 	@Inject
 	private DataSource datasource;
+	
+	@Inject
+	private SqlSessionFactory sqlSessionFactory;
+	
+	@Test
+	public void testMybatis() {
+		try(SqlSession session = sqlSessionFactory.openSession();
+			Connection con = session.getConnection();){
+			log.info("#### : "+session+"");
+			log.info("#### : "+con+"");
+		} catch(Exception e) {
+			fail(e.getMessage());
+		}
+		
+	}
 	
 	
 	@Test
