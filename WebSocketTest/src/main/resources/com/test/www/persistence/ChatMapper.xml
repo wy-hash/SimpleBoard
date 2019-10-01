@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.www.persistence.ChatMapper">
+
+	<select id="list" resultType="com.test.www.domain.ChatVO">
+		SELECT c.seq seq, c.member_seq member_seq, c.team_seq team_seq, c.content content, c.regdate regdate, m.name name
+		FROM chat c, member m
+	    where c.member_seq = m.seq
+	</select>
+	
+</mapper>
